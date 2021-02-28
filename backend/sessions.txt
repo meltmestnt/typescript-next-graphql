@@ -1,0 +1,17 @@
+req.session.userId = user._id - stores data to session;
+connectRedis will store this session in Redis behind the scenes
+redis is a key:value store
+it will look something like {userId: 1}
+1)
+sess:dqwdqqdwdqwwwd -> {userId: 1}
+2)
+express-session will set a cookie on my browser dqwdqqdw312312dqwwwd
+3)
+when user makes a request
+dqwdqqdw312312dqwwwd -> sent to the server
+4) on server it decrypt it with the secret we provided to session() middleware
+and transform dqwdqqdw312312dqwwwd to sess:dqwdqqdwdqwwwd
+5) make a request to Redis
+sess:dqwdqqdwdqwwwd
+6) look up this key sess:dqwdqqdwdqwwwd in redis and get user _id
+req.session = {userId: 1}
